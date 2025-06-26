@@ -1,3 +1,4 @@
+from time import sleep
 from lib import utils
 
 class Menu:
@@ -15,7 +16,6 @@ class Menu:
 
         print(self._pattern * self._width)
 
-
     def header(self):
         """ Shows the menu header """
 
@@ -24,9 +24,10 @@ class Menu:
         print(self.ut.center_txt(self._header_text, self._width))
         self.separator()
 
-
     def footer(self):
-        """ Show the footer of the menu """
+        """
+        Show the footer of the menu
+        """
 
         print("\n" * 2)
         self.separator()
@@ -60,13 +61,23 @@ class ExitMenu(Menu):
         super().__init__()
 
     def exit(self):
+        txt = "Exiting game in"
+        count = 3
+
+        for i in range(count, 0, -1):
+            self.ut.clear_terminal()
+            self.header()
+            print(f"{txt} {i}...")  # Muestra mensaje con la cuenta atrás
+            self.footer()
+            sleep(1)
+
+        self.ut.clear_terminal()
         self.header()
-        print("Exiting the game.\nSee you soon\nGoodbye!")
+        print(f"Thank you for playing CONNECT-4!")
         self.footer()
 
 
 if __name__ == "__main__":
-
     menu = LandingMenu()
     menu.header()
     menu.show_options()

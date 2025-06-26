@@ -6,14 +6,12 @@ def main():
     menu = LandingMenu()
     ex_menu = ExitMenu()
 
-
     while True:
         menu.header()
         menu.show_options()
 
         try:
-            opt = int(input("Select an option: "))
-
+            opt = int(input("Please select an option: "))
             if opt == 0:
                 ex_menu.exit()
                 break
