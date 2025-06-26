@@ -25,9 +25,7 @@ class Menu:
         self.separator()
 
     def footer(self):
-        """
-        Show the footer of the menu
-        """
+        """ Show the footer of the menu """
 
         print("\n" * 2)
         self.separator()
