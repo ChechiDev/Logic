@@ -16,21 +16,27 @@ class User:
 
     @name.setter
     def name(self, value: str):
+        # Validación: Longitud mínima de texto:
+        if not Validation.val_string_length(value, min_length=3, max_length=25):
+            min_length = min_length
+            max_length = max_length
+            raise NameValidationError(
+                f"\033[91mError: Name -> '{value}' must be between {min_length} and {max_length} characters.\033[0m"
+                )
 
-        if Validation.val_string_length(value, min_length=3, max_length=15):
-            self._name = value.capitalize()
+        # Validación: Que el nombre no contenga números:
+        if not Validation.val_string(value):
+            raise NameValidationError(
+                f"\033[91mError: Name -> '{value}' must contain only alphabetic characters without accents.\033[0m"
+                )
 
-        else:
-            raise NameValidationError() # Usamos la excepción personalizada
-
-        sleep(0.5)
+        self._name = value.title()
 
 
 if __name__ == "__main__":
     try:
         user = User(input("Write your name: "))
-        print(user.name)
-
+        print(user.name) # Imprimimos el atributo directamente del decorator @property
 
     except NameValidationError as e:
-        print(e)
+        print(e) # Mostramos el mensaje específico para cada validación

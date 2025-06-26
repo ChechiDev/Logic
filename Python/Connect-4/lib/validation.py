@@ -9,14 +9,19 @@ class Validation:
 
     @staticmethod
     def val_string_length(value: str, min_length: int, max_length: int) -> bool:
+        # Acepta un rango min y max de carácteres
         pattern = rf"^.{{{min_length},{max_length}}}$"
-        value = value.strip().capitalize()
+        value = value.strip()
 
         return re.match(pattern, value) is not None
 
     @staticmethod
     def val_string(value: str) -> bool:
-        pass
+        # Acepta letras y espacios
+        pattern = r"^[a-zA-Z\s]+$"
+        value = value.strip()
+
+        return re.match(pattern, value) is not None
 
     @staticmethod
     def val_dni(value: str) -> bool:

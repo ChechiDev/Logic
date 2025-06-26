@@ -13,6 +13,6 @@ class ExceptionBase(Exception):
 class NameValidationError(ExceptionBase):
     def __init__(
             self,
-            message="Invalid name...\r"):
+            message="Invalid name..."):
 
         super().__init__(message)
