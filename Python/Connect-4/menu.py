@@ -7,7 +7,7 @@ from user import User
 class Menu:
     def __init__(self):
         self._pattern = "="
-        self._width = 100
+        self._width = 80
         self._header_text = "CONNECT-4: The ultimate game"
 
         # Instancia a UTILS:
@@ -82,21 +82,31 @@ class RegistrationMenu(Menu):
     def __init__(self):
         super().__init__()
         self._header_text = "User Registration"
+        self._current_name = None
 
     def registration(self):
         """ Call to registration process """
 
+        user = User(name=None)
         while True:
             self.ut.clear_terminal()
             self.header()
 
+            if self._current_name:
+                print(f"Name: {self._current_name}\n")
+
+            else:
+                print("Name: \n")
+
             try:
                 self.footer()
                 name = input("Enter your name: ")
-                user = User(name=name)
+                user.name = name
+                self._current_name = user.name
 
                 # Si todo OK, guardamos JSON
                 user.dict_builder.send_to_json()
+                sleep(1)
                 break
 
             except NameValidationError as e:

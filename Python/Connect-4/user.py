@@ -11,9 +11,10 @@ class User:
         # Enviamos los attr a la instancia de dict_builder:
         self.dict_builder = DictBuilder()
 
+        self._name = None
+
         if name is not None:
             self.name = name # Usamos el 'setter' para aplicar validación
-
 
     @property
     def name(self) -> str:
@@ -26,10 +27,10 @@ class User:
         # Normalizamos los espacios:
         value = Validation.normalize_spaces(value)
 
+        min_length = 3
+        max_length = 25
         # Validación: Longitud mínima de texto:
-        if not Validation.val_string_length(value, min_length=3, max_length=25):
-            min_length = min_length
-            max_length = max_length
+        if not Validation.val_string_length(value, min_length = min_length, max_length = max_length):
             raise NameValidationError(
                 f"\033[91mError: Name -> '{value}' must be between {min_length} and {max_length} characters.\033[0m"
                 )
