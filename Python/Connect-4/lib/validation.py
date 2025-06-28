@@ -24,6 +24,12 @@ class Validation:
         return re.match(pattern, value) is not None
 
     @staticmethod
+    def normalize_spaces(value: str) -> str:
+        value = value.strip()
+
+        return re.sub(r"\s+", " ", value) # Con sub igualamos a replace
+
+    @staticmethod
     def val_dni(value: str) -> bool:
         pass
 

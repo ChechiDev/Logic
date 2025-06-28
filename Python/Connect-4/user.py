@@ -16,6 +16,9 @@ class User:
 
     @name.setter
     def name(self, value: str):
+        # Normalizamos los espacios:
+        value = Validation.normalize_spaces(value)
+
         # Validación: Longitud mínima de texto:
         if not Validation.val_string_length(value, min_length=3, max_length=25):
             min_length = min_length
