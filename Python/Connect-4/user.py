@@ -1,12 +1,18 @@
 from lib.validation import Validation
 from lib.exceptions import NameValidationError
 from lib.utils import Utils
+from lib.dict_builder import DictBuilder
+
 from time import sleep
 
 
 class User:
     def __init__(self, name):
+        # Enviamos los attr a la instancia de dict_builder:
+        self.dict_builder = DictBuilder()
+
         self.name = name # Usamos el 'setter' para aplicar validación
+
 
     @property
     def name(self) -> str:
@@ -35,11 +41,17 @@ class User:
 
         self._name = value.title()
 
+        # Enviamos el attr a dict_builder:
+        self.dict_builder.add_attr("name", self._name)
+
 
 if __name__ == "__main__":
     try:
         user = User(input("Write your name: "))
         print(user.name) # Imprimimos el atributo directamente del decorator @property
+
+        # Imprimimos el dict generado:
+        print(user.dict_builder.get_dict())
 
     except NameValidationError as e:
         print(e) # Mostramos el mensaje específico para cada validación
