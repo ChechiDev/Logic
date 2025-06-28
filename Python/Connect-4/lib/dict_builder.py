@@ -1,4 +1,3 @@
-import json
 
 
 class DictBuilder:
@@ -15,7 +14,3 @@ class DictBuilder:
         """ Return the dict builded """
 
         return self._user_dict
-
-
-if __name__ == "__main__":
-    pass
