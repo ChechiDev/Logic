@@ -1,10 +1,13 @@
 from time import sleep
 from lib import utils
+from lib.exceptions import ExceptionBase, NameValidationError
+from user import User
+
 
 class Menu:
     def __init__(self):
         self._pattern = "="
-        self._width = 60
+        self._width = 100
         self._header_text = "CONNECT-4: The ultimate game"
 
         # Instancia a UTILS:
@@ -27,7 +30,7 @@ class Menu:
     def footer(self):
         """ Show the footer of the menu """
 
-        print("\n" * 2)
+        print("\n" * 4)
         self.separator()
 
 
@@ -75,7 +78,27 @@ class ExitMenu(Menu):
         self.footer()
 
 
-if __name__ == "__main__":
-    menu = LandingMenu()
-    menu.header()
-    menu.show_options()
+class RegistrationMenu(Menu):
+    def __init__(self):
+        super().__init__()
+        self._header_text = "User Registration"
+
+    def registration(self):
+        """ Call to registration process """
+
+        while True:
+            self.ut.clear_terminal()
+            self.header()
+
+            try:
+                self.footer()
+                name = input("Enter your name: ")
+                user = User(name=name)
+
+                # Si todo OK, guardamos JSON
+                user.dict_builder.send_to_json()
+                break
+
+            except NameValidationError as e:
+                print(e)
+                sleep(1)

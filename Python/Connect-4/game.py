@@ -1,10 +1,11 @@
 from time import sleep
-from menu import LandingMenu, ExitMenu
+from menu import LandingMenu, ExitMenu, RegistrationMenu
 
 def main():
     """ Main function: Manages the logic and organization of the Connect-4 game """
     menu = LandingMenu()
     ex_menu = ExitMenu()
+    reg_menu = RegistrationMenu()
 
     while True:
         menu.header()
@@ -15,6 +16,9 @@ def main():
             if opt == 0:
                 ex_menu.exit()
                 break
+
+            if opt == 1:
+                reg_menu.registration()
 
             else:
                 print("Select an option: ")

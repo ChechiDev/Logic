@@ -7,11 +7,12 @@ from time import sleep
 
 
 class User:
-    def __init__(self, name):
+    def __init__(self, name=None):
         # Enviamos los attr a la instancia de dict_builder:
         self.dict_builder = DictBuilder()
 
-        self.name = name # Usamos el 'setter' para aplicar validación
+        if name is not None:
+            self.name = name # Usamos el 'setter' para aplicar validación
 
 
     @property
@@ -45,13 +46,17 @@ class User:
         self.dict_builder.add_attr("name", self._name)
 
 
-if __name__ == "__main__":
-    try:
-        user = User(input("Write your name: "))
-        print(user.name) # Imprimimos el atributo directamente del decorator @property
+    def user_registration(self):
+        """ User registration process """
 
-        # Imprimimos el dict generado:
-        print(user.dict_builder.get_dict())
+        while True:
+            try:
+                name = input("Enter your name: ")
+                self.name = name # Llamamos al 'setter' para aplicar las validaciones configuradas.
 
-    except NameValidationError as e:
-        print(e) # Mostramos el mensaje específico para cada validación
+                # si todo ok, guardamos en dict:
+                self.dict_builder.send_to_json()
+                break
+
+            except NameValidationError:
+                raise NameValidationError()

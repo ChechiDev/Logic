@@ -1,10 +1,10 @@
 import os
 import json
-from exceptions import JSONError
+from lib.exceptions import JSONError
 
 class JSONBuilder:
     def __init__(self, file_path: str):
-        self._file_path = file_path
+        self._file_path = os.path.abspath(file_path) # ruta absoluta
 
 
     def check_folder(self):
@@ -21,12 +21,19 @@ class JSONBuilder:
 
             return folder
 
-        except Exception as e:
+        except Exception:
             raise JSONError()
 
 
-    def build_json(self):
-        pass
+    def build_json(self, data: dict):
+        """ Saves the dictionary to a JSON file from dict_builder """
+        try:
+            self.check_folder()
+            with open(self._file_path, "w") as json_file:
+                json.dump(data, json_file, indent=4)
+
+        except Exception:
+            raise JSONError()
 
 
     def load_json(self):

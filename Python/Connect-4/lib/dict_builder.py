@@ -1,4 +1,4 @@
-
+from lib.json_builder import JSONBuilder
 
 class DictBuilder:
     def __init__(self):
@@ -14,3 +14,10 @@ class DictBuilder:
         """ Return the dict builded """
 
         return self._user_dict
+
+    def send_to_json(self):
+        """ Send the build dict to JSONBuilder """
+        file_path = r"data\test.json"
+        json_builder = JSONBuilder(file_path)
+
+        json_builder.build_json(self._user_dict)
